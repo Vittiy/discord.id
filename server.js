@@ -16,4 +16,9 @@ app.use(session({
     cookie: {secure: false}
 }));
 
+app.get('/', (request, response) => {
+    response.render('index.ejs');
+});
+
+
 app.listen(8000)
