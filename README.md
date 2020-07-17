@@ -5,7 +5,7 @@ Get any discord user or bot by id !
 Add header.
 Add footer.
 Improve css.
-Add user badge.
-Add account type (user /bot).
-Add user ID.
 Write documentations.
+
+# Preview
+![img](https://i.imgur.com/FUvsqY1.png)
