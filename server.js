@@ -24,14 +24,23 @@ app.get('/', (request, response) => {
 });
 
 app.get('/get/:userID', async (request, response) => {
-    const user = await client.users.fetch(request.params.userID)
-    response.render('index.ejs', {
-        username: user.username,
-        fetchedUser: true
-    });
+    try {
+        const user = await client.users.fetch(request.params.userID).catch(e => response.redirect('/404'))
+        response.render('index.ejs', {
+            username: user.username,
+            fetchedUser: true
+        }).catch(e => response.redirect('/404'));
+    }
+    catch (e) {
+        return response.redirect('/404');
+    }
 });
 
 app.get('/get', async (request, response) => {
+    response.redirect('/404');
+});
+
+app.get('/404', async (request, response) => {
     response.render('404.ejs');
 });
 
