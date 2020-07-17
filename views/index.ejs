@@ -1,26 +1,14 @@
-<link rel="stylesheet" href="/assets/bootsrap/css/bootstrap.min.css">
-<%
-if (locals.fetchedUser) {
-%>
-    <div class="card" style="width: 18rem;">
-        <img src="https://cdn.discordapp.com/avatars/<%= locals.id %>/<%= locals.avatar %>" class="card-img-top"
-             alt="...">
-        <div class="card-body">
-            <h5 class="card-title"><%= locals.username %></h5>
-        </div>
-    </div>
-<%
-} else {
-%>
-    <form method="post">
-        <div class="form-group">
-            <input type="text" class="form-control" id="userIdInput" placeholder="user id">
-        </div>
-        <a type="submit" class="btn btn-primary" onclick="window.location.href='/get/' + getInputContent()">Search</a>
-    </form>
-    <script>
-        function getInputContent() {
-            return document.getElementById('userIdInput').value
-        }
-    </script>
-<% } %>
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Sora">
+
+    <title>DISCORD ID</title>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="/assets/bootsrap/css/bootstrap.min.css">
+</head>
+<body class="p-3 mb-2 bg-dark text-white">
+</body>
+</html>
