@@ -43,6 +43,7 @@ app.get('/get/:userID', async (request, response) => {
             VERIFIED_DEVELOPER: user.flags.has(1 << 17)
         }
     }
+
     response.render('index.ejs', {
         username: user.username,
         avatar: user.avatar,
