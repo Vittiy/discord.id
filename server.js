@@ -9,8 +9,6 @@ app.set('view engine', 'ejs');
 client.login(config.botTOKEN)
 
 app.use('/assets', express.static('public'));
-app.use(express.urlencoded({extended: false}));
-app.use(express.json());
 app.use(session({
     secret: config.secret,
     resave: false,
