@@ -54,10 +54,6 @@ app.get('/get/:userID', async (request, response) => {
     });
 });
 
-app.get('/get', async (request, response) => {
-    response.redirect('/404');
-});
-
 app.get('/404', async (request, response) => {
     response.render('404.ejs');
 });
