@@ -1,9 +1,10 @@
 <link rel="stylesheet" href="/assets/bootsrap/css/bootstrap.min.css">
 <%
- if (locals.fetchedUser) {
- %>
+if (locals.fetchedUser) {
+%>
     <div class="card" style="width: 18rem;">
-        <img src="https://cdn.discordapp.com/avatars/<%= locals.id %>/<%= locals.avatar %>" class="card-img-top" alt="...">
+        <img src="https://cdn.discordapp.com/avatars/<%= locals.id %>/<%= locals.avatar %>" class="card-img-top"
+             alt="...">
         <div class="card-body">
             <h5 class="card-title"><%= locals.username %></h5>
         </div>
@@ -18,8 +19,8 @@
         <a type="submit" class="btn btn-primary" onclick="window.location.href='/get/' + getInputContent()">Search</a>
     </form>
     <script>
-        function getInputContent(){
+        function getInputContent() {
             return document.getElementById('userIdInput').value
         }
     </script>
-<%}%>
+<% } %>
