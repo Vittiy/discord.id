@@ -27,6 +27,7 @@ app.get('/get/:userID', async (request, response) => {
 
     const user = await client.users.fetch(request.params.userID).catch(() => {});
     if(!user) return response.redirect('/404');
+    if(!user.flags) await user.fetchFlags();
     let badges;
     if (user.bot) {
         badges = {
