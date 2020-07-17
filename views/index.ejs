@@ -20,31 +20,32 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 </nav>
-<% if (!locals.fetchedUser) {
-%>
-<div class="jumbotron bg-transparent">
+<div class="container-fluid">
+    <div class="jumbotron bg-transparent">
+        <% if (!locals.fetchedUser) {
+        %>
+            <form class="form-inline">
+                <div class="input-group flex-nowrap">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="addon-wrapping">ID</span>
+                    </div>
+                    <input type="text" class="form-control" id="userIdInput" placeholder="User ID" aria-label="Username"
+                           aria-describedby="addon-wrapping">
+                </div>
+                <a class="btn btn-primary" type="submit" onclick="window.location.href='/get/' + getInputContent()">
+                    <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                    Search
+                </a>
+            </form>
+            <script>
+                function getInputContent() {
+                    return document.getElementById('userIdInput').value
+                }
+            </script>
+        <% } else { %>
 
-    <form class="form-inline">
-        <div class="input-group flex-nowrap">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="addon-wrapping">ID</span>
-            </div>
-            <input type="text" class="form-control" id="userIdInput" placeholder="User ID" aria-label="Username"
-                   aria-describedby="addon-wrapping">
-        </div>
-        <a class="btn btn-primary" type="submit" onclick="window.location.href='/get/' + getInputContent()">
-            <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
-            Search
-        </a>
-    </form>
+        <% } %>
+    </div>
 </div>
-    <script>
-        function getInputContent() {
-            return document.getElementById('userIdInput').value
-        }
-    </script>
-<% } else { %>
-
-<% } %>
 </body>
 </html>
