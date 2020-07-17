@@ -1,0 +1,26 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"
+      xmlns="http://www.w3.org/1999/html">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+
+
+<form method="post">
+    <div class="form-group">
+        <label for="formGroupExampleInput2">Another label</label>
+        <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input placeholder">
+    </div>
+    <a type="submit" class="btn btn-primary" onclick="window.location.href='/get/' + redirect()" >Search</a>
+</form>
+<%
+ if (locals.fetchedUser) {
+ %>
+mhhh
+
+<%
+}
+%>
+<script>
+    function redirect(){
+        return document.getElementById('formGroupExampleInput2').value
+    }
+</script>
