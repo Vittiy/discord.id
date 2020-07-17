@@ -62,5 +62,10 @@ app.get('/404', async (request, response) => {
     response.render('404.ejs');
 });
 
+// for invalid routes
+app.get('*', (request, response) => {
+    response.redirect("/404");
+});
+
 
 app.listen(8000)
