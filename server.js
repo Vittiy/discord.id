@@ -26,10 +26,32 @@ app.get('/', (request, response) => {
 app.get('/get/:userID', async (request, response) => {
     const user = await client.users.fetch(request.params.userID).catch(() => {});
     if(!user) return response.redirect('/404');
+    let badges;
+    if (user.bot) {
+        badges = {
+            BUGHUNTER_LEVEL_1: user.flags.has(1 << 3),
+            VERIFIED_BOT: user.flags.has(1 << 16)
+        }
+    } else {
+        badges = {
+            DISCORD_EMPLOYEE: user.flags.has(1 << 0),
+            DISCORD_PARTNER: user.flags.has(1 << 1),
+            HYPESQUAD_EVENTS: user.flags.has(1 << 2),
+            BUGHUNTER_LEVEL_1: user.flags.has(1 << 3),
+            HOUSE_BRAVERY: user.flags.has(1 << 6),
+            HOUSE_BRILLIANCE: user.flags.has(1 << 7),
+            HOUSE_BALANCE: user.flags.has(1 << 8),
+            EARLY_SUPPORTER: user.flags.has(1 << 9),
+            BUGHUNTER_LEVEL_2: user.flags.has(1 << 14),
+            VERIFIED_DEVELOPER: user.flags.has(1 << 17)
+        }
+    }
     response.render('index.ejs', {
         username: user.username,
         avatar: user.avatar,
+        badges: badges,
         id: user.id,
+        bot: user.bot,
         fetchedUser: true
     });
 });
