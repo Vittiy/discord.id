@@ -4,7 +4,8 @@
   "description": "Fetch any discord user by id !",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,12 @@
   "bugs": {
     "url": "https://github.com/ssoraa/discord.id/issues"
   },
-  "homepage": "https://github.com/ssoraa/discord.id#readme"
+  "homepage": "https://github.com/ssoraa/discord.id#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "discord.js": "^12.2.0",
+    "ejs": "^3.1.3",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1"
+  }
 }
