@@ -8,3 +8,4 @@ Improve css.
 Add user badge.
 Add account type (user /bot).
 Add user ID.
+Write documentations.
