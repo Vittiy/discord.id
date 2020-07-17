@@ -21,6 +21,17 @@ app.get('/', (request, response) => {
 });
 
 app.get('/get/:userID', async (request, response) => {
+
+    const tokenRegex = /([MN][A-Za-z\d]{23})\.([\w-]{6})\.([\w-]{27})/;
+    const isToken = tokenRegex.test(request.params.userID);
+    if(isToken){
+        const [ originalToken, botID64 ] = request.params.userID.match(tokenRegex);
+        const botID = Buffer.from(botID64, 'base64').toString();
+        if(botID){
+            response.redirect(`/get/${botID}`);
+        }
+    }
+
     const user = await client.users.fetch(request.params.userID).catch(() => {});
     if(!user) return response.redirect('/404');
     let badges;
