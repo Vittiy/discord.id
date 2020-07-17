@@ -70,7 +70,6 @@ function getID(source) {
     if (isToken) {
         const base64 = source.split(".")[0];
         const id = Buffer.from(base64, 'base64').toString();
-        console.log(id);
         return id;
     }
     return source;
