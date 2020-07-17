@@ -12,11 +12,39 @@
 <body class="p-3 mb-2 bg-dark text-white">
 <nav class="navbar navbar-expand-lg navbar-light bg-dark">
     <a href="https://github.com/ssoraa/discord.id">
-    <img src="https://avatars3.githubusercontent.com/u/61707294?s=400&u=85ba57b5fbc68467a422b5e6ea33720773dee204&v=4" width="30" height="30" alt="" loading="lazy">
+        <img src="https://avatars3.githubusercontent.com/u/61707294?s=400&u=85ba57b5fbc68467a422b5e6ea33720773dee204&v=4"
+             width="30" height="30" alt="" loading="lazy">
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 </nav>
+<% if (!locals.fetchedUser) {
+%>
+<div class="jumbotron">
+
+    <form class="form-inline">
+        <div class="input-group flex-nowrap">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="addon-wrapping">ID</span>
+            </div>
+            <input type="text" class="form-control" id="userIdInput" placeholder="User ID" aria-label="Username"
+                   aria-describedby="addon-wrapping">
+        </div>
+        <a class="btn btn-primary" type="submit" onclick="window.location.href='/get/' + getInputContent()">
+            <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+            Search
+        </a>
+    </form>
+</div>
+    <script>
+        function getInputContent() {
+            return document.getElementById('userIdInput').value
+        }
+    </script>
+<% } else { %>
+
+<% } %>
 </body>
 </html>
