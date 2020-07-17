@@ -24,7 +24,8 @@ app.get('/', (request, response) => {
 });
 
 app.get('/get/:userID', async (request, response) => {
-    const user = await client.users.fetch(request.params.userID).catch(e => response.redirect('/404'))
+    const user = await client.users.fetch(request.params.userID).catch(() => {});
+    if(!user) response.redirect('/404');
     response.render('index.ejs', {
         username: user.username,
         avatar: user.avatar,
