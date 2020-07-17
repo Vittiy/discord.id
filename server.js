@@ -49,6 +49,7 @@ app.get('/get/:userID', async (request, response) => {
         badges: badges,
         id: user.id,
         bot: user.bot,
+        createdAt: new Intl.DateTimeFormat('fr').format(user.createdAt),
         fetchedUser: true
     });
 });
