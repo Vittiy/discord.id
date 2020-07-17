@@ -1,51 +1,29 @@
-<!doctype html>
-<html lang="fr">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="author" content="Sora">
+<%- include("./partials/header.ejs") %>
+<%- include("./partials/loader.ejs") %>
 
-    <title>DISCORD ID</title>
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="/assets/bootsrap/css/bootstrap.min.css">
-</head>
-<body class="p-3 mb-2 bg-dark text-white">
-<nav class="navbar navbar-expand-lg navbar-light bg-dark">
-    <a href="https://github.com/ssoraa/discord.id">
-        <img src="https://avatars3.githubusercontent.com/u/61707294?s=400&u=85ba57b5fbc68467a422b5e6ea33720773dee204&v=4"
-             width="30" height="30" alt="" loading="lazy">
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-</nav>
-<div class="container-fluid">
-    <div class="jumbotron bg-transparent">
-        <% if (!locals.fetchedUser) {
-        %>
-            <form class="form-inline">
-                <div class="input-group flex-nowrap">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="addon-wrapping">ID</span>
-                    </div>
-                    <input type="text" class="form-control" id="userIdInput" placeholder="User ID" aria-label="Username"
-                           aria-describedby="addon-wrapping">
-                </div>
-                <a class="btn btn-primary" type="submit" onclick="window.location.href='/get/' + getInputContent()">
-                    <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
-                    Search
-                </a>
-            </form>
-            <script>
-                function getInputContent() {
-                    return document.getElementById('userIdInput').value
-                }
-            </script>
-        <% } else { %>
-
+<div class="container">
+    <div class="jumbotron bg-dark text-white mt-5">
+        <% if (error) { %>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong><%= error %></strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
         <% } %>
+        <form method="POST">
+            <div class="form-group">
+                <label for="userid"><h3>User ID <i class="required" data-placement="right" title="Required">*</i></h3></label>
+                <input type="text" class="form-control" id="userid" name="user" aria-describedby="help" autocomplete="off" required>
+                <small id="help" class="form-text text-muted">Enter discord user id here.</small>
+            </div>
+            <button type="submit" class="btn btn-blurple rounded" style="width: 100% !important;">Submit</button>
+        </form>
     </div>
 </div>
+<script>
+    $(".required").tooltip();
+</script>
 </body>
+
 </html>

@@ -1,0 +1,34 @@
+<div id="loaderarea">
+    <div class="page_spinner d-flex flex-row justify-content-center align-items-center">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+</div>
+<script>
+    document.oncontextmenu = () => {
+        return false;
+    }
+    document.onselectstart = () => {
+        return false;
+    }
+    document.body.style.overflowY = "hidden";
+    document.body.style.overflowX = "hidden";
+    window.onload = () => {
+        $("#loaderarea").remove();
+        document.body.style.overflowY = "";
+        document.body.style.overflowX = "hidden";
+        document.oncontextmenu = () => {
+            return true;
+        }
+        document.onselectstart = () => {
+            return true;
+        }
+        emojify();
+    }
+
+    function emojify() {
+        twemoji.size = '36x36';
+        twemoji.parse(document.body);
+    }
+</script>

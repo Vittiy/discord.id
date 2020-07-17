@@ -1,73 +1,77 @@
-const express = require('express'),
-    config = require('./config'),
-    {Client} = require('discord.js'),
-    app = express(),
-    client = new Client();
+// modules
+const express = require("express");
+const app = express();
+const config = require("./config");
+const client = new (require("discord.js")).Client();
+const Badges = require("./Badges");
+const PORT = config.PORT || 3000;
 
-app.set('view engine', 'ejs');
-client.login(config.botTOKEN)
-
-app.use('/assets', express.static('public'));
-
-app.get('/', (request, response) => {
-    response.render('index.ejs');
+client.on("ready", () => {
+    client.user.setStatus("invisible");
+    console.log("Bot is online!");
 });
 
-app.get('/get/:userID', async (request, response) => {
+// run the client
+client.login(config.TOKEN);
 
-    const tokenRegex = /([MN][A-Za-z\d]{23})\.([\w-]{6})\.([\w-]{27})/;
-    const isToken = tokenRegex.test(request.params.userID);
-    if(isToken){
-        const [ originalToken, botID64 ] = request.params.userID.match(tokenRegex);
-        const botID = Buffer.from(botID64, 'base64').toString();
-        if(botID){
-            response.redirect(`/get/${botID}`);
-        }
-    }
+// config
+app.set("view engine", "ejs");
+app.use(express.static("public"));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-    const user = await client.users.fetch(request.params.userID).catch(() => {});
-    if(!user) return response.redirect('/404');
-    if(!user.flags) await user.fetchFlags();
-    let badges;
-    if (user.bot) {
-        badges = {
-            BUGHUNTER_LEVEL_1: user.flags.has(1 << 3),
-            VERIFIED_BOT: user.flags.has(1 << 16)
-        }
-    } else {
-        badges = {
-            DISCORD_EMPLOYEE: user.flags.has(1 << 0),
-            DISCORD_PARTNER: user.flags.has(1 << 1),
-            HYPESQUAD_EVENTS: user.flags.has(1 << 2),
-            BUGHUNTER_LEVEL_1: user.flags.has(1 << 3),
-            HOUSE_BRAVERY: user.flags.has(1 << 6),
-            HOUSE_BRILLIANCE: user.flags.has(1 << 7),
-            HOUSE_BALANCE: user.flags.has(1 << 8),
-            EARLY_SUPPORTER: user.flags.has(1 << 9),
-            BUGHUNTER_LEVEL_2: user.flags.has(1 << 14),
-            VERIFIED_DEVELOPER: user.flags.has(1 << 17)
-        }
-    }
-
-    response.render('index.ejs', {
-        username: user.username,
-        avatar: user.avatar,
-        badges: badges,
-        id: user.id,
-        bot: user.bot,
-        createdAt: new Intl.DateTimeFormat('fr').format(user.createdAt),
-        fetchedUser: true
+// main route
+app.get("/", (req, res) => {
+    res.render("index", {
+        error: null
     });
 });
 
-app.get('/404', async (request, response) => {
-    response.render('404.ejs');
+// main route (post)
+app.post("/", async (req, res) => {
+    const userid = req.body.user;
+    if (!userid) return res.redirect("/404");
+
+    // fetch user
+    const user = userid === client.user.id ? client.user : await client.users.fetch(getID(userid)).catch(e => {});
+    if (!user) return res.render("index", {
+        error: "Invalid user id!"
+    });
+    if (!user.flags) await user.fetchFlags();
+    // get data
+    const Flags = user.flags.toArray();
+    if (user.bot && Flags.includes("VERIFIED_BOT")) user.verified = true;
+    const flags = Flags.filter(b => !!Badges[b]).map(m => Badges[m]);
+    if (user.avatar.startsWith("a_")) flags.push(Badges["DISCORD_NITRO"]);
+    if (user.bot) {
+        flags.push(Badges["BOT"]);
+    }
+
+    return res.render("user", {
+        user,
+        flags
+    });
 });
 
-// for invalid routes
-app.get('*', (request, response) => {
-    response.redirect("/404");
+// handle invalid routes/methods
+app.all("*", (req, res) => {
+    return res.render("404");
 });
 
+// start the server
+app.listen(PORT, () => {
+    console.log(`Website running on port *${PORT}`);
+});
 
-app.listen(8000)
+// resolve user id
+function getID(source) {
+    const tokenRegex = /([MN][A-Za-z\d]{23})\.([\w-]{6})\.([\w-]{27})/;
+    const isToken = tokenRegex.test(source);
+    if (isToken) {
+        const base64 = source.split(".")[0];
+        const id = Buffer.from(base64, 'base64').toString();
+        console.log(id);
+        return id;
+    }
+    return source;
+}

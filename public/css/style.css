@@ -1,0 +1,94 @@
+@import url("/css/bootstrap.min.css");
+@import url("/css/loader.css");
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+
+:root {
+    --discord-dark: #2C2F33;
+    --alpha-dark: #23272A;
+    --blurple: #7289DA;
+    --dark-blurple: #4D5E94;
+    --discord-green: #43B581;
+    --discord-green-d: #31a06e;
+}
+
+body {
+    font-family: 'Ubuntu', sans-serif;
+    background-color: var(--discord-dark);
+    color: #FFF;
+}
+
+.avatar {
+    height: 140px;
+    width: 140px;
+    border-radius: 50% !important;
+}
+
+.badges {
+    height: 40px;
+    width: 45px;
+    cursor: pointer;
+}
+
+.botbadge {
+    height: 30px;
+    width: 50px;
+}
+
+.botbadge-v {
+    height: 30px;
+    width: 60px;
+}
+
+.required {
+    color: #FF0000;
+    cursor: pointer;
+}
+
+input {
+    background-color: var(--alpha-dark) !important;
+    color: #FFFFFF !important;
+    border: none !important;
+}
+
+.btn-blurple {
+    background-color: var(--blurple) !important;
+    color: #FFFFFF !important;
+}
+
+.btn-blurple:hover {
+    background-color: var(--dark-blurple) !important;
+    color: #FFFFFF !important;
+}
+
+.bghr {
+    background-color: rgba(255,255,255,0.3) !important;
+    height: 1px !important;
+}
+
+.bg-alpha-dark {
+    background-color: var(--alpha-dark) !important;
+    color: #FFFFFF;
+}
+
+.btn-discord-green {
+    background-color: var(--discord-green) !important;
+    color: #FFFFFF !important;
+}
+
+.btn-discord-green:hover {
+    background-color: var(--discord-green-d) !important;
+    color: #FFFFFF !important;
+}
+
+::-webkit-scrollbar {
+    width: 3px;
+}
+
+::-webkit-scrollbar-track {
+    background: none !important;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--alpha-dark);
+    border-radius: 15px;
+}
