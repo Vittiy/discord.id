@@ -1,7 +1,7 @@
 const express = require('express'),
     bodyParser = require('body-parser'),
     config = require('./config'),
-    { Client } = require('discord.js'),
+    {Client} = require('discord.js'),
     session = require('express-session'),
     app = express(),
     client = new Client();
@@ -24,16 +24,13 @@ app.get('/', (request, response) => {
 });
 
 app.get('/get/:userID', async (request, response) => {
-    try {
-        const user = await client.users.fetch(request.params.userID).catch(e => response.redirect('/404'))
-        response.render('index.ejs', {
-            username: user.username,
-            fetchedUser: true
-        }).catch(e => response.redirect('/404'));
-    }
-    catch (e) {
-        return response.redirect('/404');
-    }
+    const user = await client.users.fetch(request.params.userID).catch(e => response.redirect('/404'))
+    response.render('index.ejs', {
+        username: user.username,
+        avatar: user.avatar,
+        id: user.id,
+        fetchedUser: true
+    });
 });
 
 app.get('/get', async (request, response) => {
