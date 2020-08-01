@@ -43,7 +43,6 @@ app.post("/", async (req, res) => {
     if (user.bot && Flags.includes("VERIFIED_BOT")) user.verified = true;
     const flags = Flags.filter(b => !!Badges[b]).map(m => Badges[m]);
     if (user.avatar && user.avatar.startsWith("a_")) flags.push(Badges["DISCORD_NITRO"]);
-    if (user.avatar) user.avatar = 'https://discordapp.com/assets/322c936a8c8be1b803cd94861bdfa868.png';
     if (user.bot) {
         flags.push(Badges["BOT"]);
     }
