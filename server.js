@@ -27,9 +27,15 @@ app.get("/", (req, res) => {
     });
 });
 
-// main route (post)
+// redirect post requests to get
 app.post("/", async (req, res) => {
-    const userid = req.body.user;
+    if(req.body.user) res.redirect(`/${req.body.user}`);
+    else res.redirect("/404");
+});
+
+// main route (get)
+app.get("/:userID", async (req, res) => {
+    const userid = req.params.userID;
     if (!userid) return res.redirect("/404");
 
     // fetch user
