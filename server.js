@@ -59,31 +59,6 @@ app.get("/:userID", async (req, res) => {
     });
 });
 
-// GET METHOD FOR X-BOT_V2 INTER SERVER.
-app.get("/xbot/:userID", async (req, res) => {
-    const userid = req.params.userID;
-    if (!userid) return res.redirect("/404");
-
-    // fetch user
-    const user = userid === client.user.id ? client.user : await client.users.fetch(getID(userid)).catch(e => {});
-    if (!user) return res.render("index", {
-        error: "Invalid user id!"
-    });
-    if (!user.flags) await user.fetchFlags();
-    // get data
-    const Flags = user.flags.toArray();
-    if (user.bot && Flags.includes("VERIFIED_BOT")) user.verified = true;
-    const flags = Flags.filter(b => !!Badges[b]).map(m => Badges[m]);
-    if (user.avatar.startsWith("a_")) flags.push(Badges["DISCORD_NITRO"]);
-    if (user.bot) {
-        flags.push(Badges["BOT"]);
-    }
-
-    return res.render("user", {
-        user,
-        flags
-    });
-});
 
 // handle invalid routes/methods
 app.all("*", (req, res) => {
