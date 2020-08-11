@@ -17,7 +17,7 @@ module.exports = {
     },
     DISCORD_NITRO: {
         name: "Discord Nitro",
-        url: "https://cdn.discordapp.com/emojis/730841943046619186.png?v=1"
+        url: "https://cdn.discordapp.com/emojis/314068430611415041.png?v=1"
     },
     DISCORD_PARTNER: {
         name: "Discord Partner",
