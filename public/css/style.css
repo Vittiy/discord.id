@@ -1,7 +1,6 @@
 @import url("/css/bootstrap.min.css");
 @import url("/css/loader.css");
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
-
 :root {
     --discord-dark: #2C2F33;
     --alpha-dark: #23272A;
@@ -10,85 +9,86 @@
     --discord-green: #43B581;
     --discord-green-d: #31a06e;
 }
-
+::-webkit-scrollbar { width: 3px;}
+::-webkit-scrollbar-track {background: none !important;}
+::-webkit-scrollbar-thumb {
+    background: var(--alpha-dark);
+    border-radius: 15px;
+}
 body {
     font-family: 'Ubuntu', sans-serif;
     background-color: var(--discord-dark);
     color: #FFF;
 }
-
+a {
+    transition-duration: .2s;
+    text-decoration: none;
+}
+a:hover,
+a:focus {
+    transition-duration: .5s;
+    color: var(--blurple) !important;
+}
 .avatar {
     height: 140px;
     width: 140px;
     border-radius: 50% !important;
 }
-
 .badges {
-    height: 40px;
-    width: 45px;
+    height: 30px;
+    max-width: 35px;
     cursor: pointer;
 }
-
 .botbadge {
-    height: 30px;
-    width: 50px;
+    height: 23px;
 }
-
 .botbadge-v {
-    height: 30px;
-    width: 60px;
+    height: 23px;
 }
-
 .required {
-    color: #FF0000;
+    color: #d9534f;
     cursor: pointer;
 }
-
 input {
     background-color: var(--alpha-dark) !important;
     color: #FFFFFF !important;
     border: none !important;
 }
-
 .btn-blurple {
     background-color: var(--blurple) !important;
     color: #FFFFFF !important;
 }
-
 .btn-blurple:hover {
     background-color: var(--dark-blurple) !important;
-    color: #FFFFFF !important;
+    color: #b9b9b9 !important;
 }
-
 .bghr {
     background-color: rgba(255,255,255,0.3) !important;
     height: 1px !important;
 }
-
 .bg-alpha-dark {
     background-color: var(--alpha-dark) !important;
     color: #FFFFFF;
 }
-
 .btn-discord-green {
     background-color: var(--discord-green) !important;
     color: #FFFFFF !important;
 }
-
 .btn-discord-green:hover {
     background-color: var(--discord-green-d) !important;
     color: #FFFFFF !important;
 }
-
-::-webkit-scrollbar {
-    width: 3px;
+.usr_title {
+    font-size: 20px;
 }
-
-::-webkit-scrollbar-track {
-    background: none !important;
+.notice_footer {
+    margin-top: -30px !important;
 }
-
-::-webkit-scrollbar-thumb {
-    background: var(--alpha-dark);
-    border-radius: 15px;
+.alert-danger {
+    text-align: -webkit-center;
+    color: #fdfcfc;
+    background-color: #d9534f;
+    border-color: #d9534f;
+    border-radius: unset;
+    font-weight: 200;
 }
