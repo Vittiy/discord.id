@@ -2,29 +2,57 @@
 <%- include("./partials/loader.ejs") %>
 
 <div class="container">
-    <div class="jumbotron bg-dark text-white mt-5">
-        <% if (error) { %>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong><%= error %></strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <% } %>
-        <form method="POST">
-            <div class="form-group">
-                <label for="userid"><h3>User ID <i class="required" data-placement="right" title="Required">*</i></h3></label>
-                <input type="text" class="form-control" id="userid" name="user" aria-describedby="help" autocomplete="off" required>
-                <small id="help" class="form-text text-muted">Enter discord user id here.</small>
+    <div class="card bg-dark text-white mt-5 shadow-sm">
+            <% if (error) { %>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <%= error %>
             </div>
-            <button type="submit" class="btn btn-blurple rounded" style="width: 100% !important;">Submit</button>
-            <small id="info" class="form-text text-muted">Not affiliated with Discord, Inc. <a href="https://github.com/ssoraa/discord.id">GITHUB</a>, <a href="https://discord.gg/gk65SxF">DISCORD</a></small>
-        </form>
+            <% } %>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="form-group">
+                        <div class="card-title">
+                            <label for="userid" class="usr_title">User ID <i class="required" data-placement="right" title="Required">*</i></label>
+                        </div>
+                        <input type="text" class="form-control" id="userid" name="user" aria-describedby="help" autocomplete="off"  placeholder="Enter Discord user ID here." autofocus required>
+                    </div>
+                    <div class="card-body">
+                        <button type="submit" class="btn btn-blurple rounded" style="width: 100% !important;">Submit</button>
+                    </div>
+                </form>
+            </div>
+            <div class="card-body notice_footer">
+                <p id="info" class="card-text text-muted">Not affiliated with Discord, Inc.
+                    — <a href="https://github.com/Mist3r-Robot/discord.id" class="card-text text-muted" target="_blank">See on GitHub</a>
+                    — <a href="https://mrrobot.app/add" class="card-text text-muted" target="_blank">Use directly the bot</a>
+                    — <a href="https://github.com/ssoraa/discord.id" class="card-text text-muted" target="_blank">Initial repository</a></p>
+            </div>
     </div>
 </div>
-<script>
-    $(".required").tooltip();
+<script type="text/javascript">
+      var _paq = window._paq || [];
+      _paq.push(["setDoNotTrack", true]);
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.thomasbnt.fr/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+      (function(a,b,c){var d=a.history,e=document,f=navigator||{},g=localStorage,h=encodeURIComponent,i=d.pushState,k=function(){return Math.random().toString(36)},l=function(){return g.cid||(g.cid=k()),g.cid},m=function(r){var s=[];for(var t in r)
+          r.hasOwnProperty(t)&&void 0!==r[t]&&s.push(h(t)+"="+h(r[t]));return s.join("&")},n=function(r,s,t,u,v,w,x){var z="https://www.google-analytics.com/collect",A=m({v:"1",ds:"web",aip:c.anonymizeIp?1:void 0,tid:b,cid:l(),t:r||"pageview",sd:c.colorDepth&&screen.colorDepth?screen.colorDepth+"-bits":void 0,dr:e.referrer||void 0,dt:e.title,dl:e.location.origin+e.location.pathname+e.location.search,ul:c.language?(f.language||"").toLowerCase():void 0,de:c.characterSet?e.characterSet:void 0,sr:c.screenSize?(a.screen||{}).width+"x"+(a.screen||{}).height:void 0,vp:c.screenSize&&a.visualViewport?(a.visualViewport||{}).width+"x"+(a.visualViewport||{}).height:void 0,ec:s||void 0,ea:t||void 0,el:u||void 0,ev:v||void 0,exd:w||void 0,exf:"undefined"!=typeof x&&!1==!!x?0:void 0});if(f.sendBeacon)f.sendBeacon(z,A);else{var y=new XMLHttpRequest;y.open("POST",z,!0),y.send(A)}};d.pushState=function(r){return"function"==typeof d.onpushstate&&d.onpushstate({state:r}),setTimeout(n,c.delay||10),i.apply(d,arguments)},n(),a.ma={trackEvent:function o(r,s,t,u){return n("event",r,s,t,u)},trackException:function q(r,s){return n("exception",null,null,null,null,r,s)}}})
+      (window,"UA-90310174-4",{anonymizeIp:true,colorDepth:true,characterSet:true,screenSize:true,language:true});const cfcl='color:#314759; font-size: small; font-family: \'Open Sans\', SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", sans-serif'
+      window.addEventListener('beforeinstallprompt', (event) => {
+          window.deferredPrompt = event
+          divInstall.classList.toggle('hidden', false)
+      })
+      console.group("Informations")
+      console.log('%cHello friend.',cfcl)
+      console.log('%cFollow me on GitHub for Open Source projects : https://github.com/thomasbnt',cfcl)
+      console.groupEnd("Informations")
 </script>
+<noscript><p><img src="//analytics.thomasbnt.fr/matomo.php?idsite=1&rec=1" style="border:0;" alt=""/></p></noscript>
 </body>
-
 </html>

@@ -9,30 +9,29 @@
     }
 %>
 <div class="container">
-    <div class="jumbotron bg-transparent bg-alpha-dark text-white mt-5">
-        <div class="row" style="width: 100%;">
+    <div class="card-body bg-transparent bg-alpha-dark text-white mt-5 shadow-sm">
+        <button class="btn btn-discord-green rounded float-right" onclick="location.href='/'">Return to Home</button>
+        <div class="row">
             <div class="col-sm-2 avatar">
                 <img src="<%= user.displayAvatarURL({ dynamic: true, format: "png", size: 1024 }) %>" draggable="false" class="rounded float-left avatar" alt="avatar">
             </div>
+            <div class="col-sm-1"></div>
             <div class="col-sm">
                 <h1 class="username"><%= user.username.substr(0,32) %><small class="text-muted discriminator">#<%= user.discriminator %></small>
-                    <%- user.bot ? (user.bot && user.verified) ? generateBadge(true) : generateBadge() : "" %><button class="btn btn-discord-green rounded float-right" onclick="location.href='/'">Return Home</button></h1>
+                    <%- user.bot ? (user.bot && user.verified) ? generateBadge(true) : generateBadge() : "" %>
                 <% 
                 flags.forEach(badge => { 
                     if (badge.name === "Bot" || badge.name === "Verified Bot") return;
                     else {
                 %>
-                <img class="img-fluid badges" draggable="false" src="<%= badge.url %>" data-toggle="tooltip" data-placement="top" title="<%= badge.name %>">
-                <% 
-                    }
-                }) 
-                %>
+                <img class="img-fluid badges" draggable="false" src="<%= badge.url %>" data-toggle="tooltip" data-placement="top" title="<%= badge.name %>" alt="<%= badge.name %> Badge">
+                <% }}) %></h1>
                 <hr class="bg-transparent my-4">
-                <h5><b>ID:</b> <%= user.id %></h5>
-                <h5><b>Username:</b> <%= user.username %></h5>
-                <h5><b>Discriminator:</b> <%= user.discriminator %></h5>
-                <h5><b>Bot?:</b> <%= user.bot ? "Yes" : "No" %><%= user.verified ? "✅" : "" %></h5>
-                <h5><b>Created at:</b> <%= user.createdAt.toLocaleString() %></h5>
+                <h5><b>ID :</b> <%= user.id %></h5>
+                <h5><b>Username :</b> <%= user.username %></h5>
+                <h5><b>Discriminator :</b> <%= user.discriminator %></h5>
+                <h5><b>This is a bot ? </b> <%= user.bot ? "Yes" : "Nope" %><%= user.verified ? " and verified. ✔" : "" %></h5>
+                <h5 data-toggle="tooltip" data-placement="top" title="Local date"><b>Created at :</b> <%= user.createdAt.toLocaleString('fr-FR') %></h5>
             </div>
         </div>
     </div>
@@ -43,5 +42,4 @@
     $(".botbadge-v").tooltip();
 </script>
 </body>
-
 </html>

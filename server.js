@@ -8,7 +8,6 @@ const PORT = config.PORT || 3000;
 
 client.on("ready", () => {
     client.user.setStatus("invisible");
-    console.log("Bot is online!");
 });
 
 // run the client
@@ -41,7 +40,7 @@ app.get("/:userID", async (req, res) => {
     // fetch user
     const user = userid === client.user.id ? client.user : await client.users.fetch(getID(userid)).catch(e => {});
     if (!user) return res.render("index", {
-        error: "Invalid user id!"
+        error: "Invalid user ID !"
     });
     if (!user.flags) await user.fetchFlags();
     // get data
@@ -67,7 +66,7 @@ app.all("*", (req, res) => {
 
 // start the server
 app.listen(PORT, () => {
-    console.log(`Website running on port *${PORT}`);
+    console.log(`Website running on port :${PORT}`);
 });
 
 // resolve user id
