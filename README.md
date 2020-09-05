@@ -1,16 +1,12 @@
 # discord.id
-Get any discord user or bot by id !
-
-# Live Instance
-**[https://user.x-bot.fr/](https://user.x-bot.fr/)**
-# Live Instance Preview
-![img](https://i.gyazo.com/450afcd320c7ca2ba29c1eb9219322c0.png)
-![img](https://gyazo.com/8e4ac8c3826995277e6d127f1f6a77a4.gif)
+Get any Discord user/bot informations by ID !
 
 # Preview
-![img](https://i.imgur.com/FUvsqY1.png)
 
+![image](https://user-images.githubusercontent.com/14293805/92308046-15077100-ef9b-11ea-90a5-547bf3c912fe.png)
 
-# SETUP
+# How to setup
 
-rename `config.example.js` to `config.js` and complet them.
+rename `config.example.js` to `config.js` and check them.
+
+[![Badge forked from](https://img.shields.io/badge/Forked-from%20ssoraa%2Fdiscord.id-black?logo=GitHub&style=for-the-badge)]()

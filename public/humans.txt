@@ -1,0 +1,10 @@
+# TEAM
+
+Name     : Thomas Bnt.
+Site     : admin[at]thomasbnt[dot.]fr , only for contact Administration.
+Twitter  : @thomasbnt_
+Location : France.
+
+# TECHNOLOGY
+
+CSS3/HTML5 with Bootstrap, JS and Discord.js
