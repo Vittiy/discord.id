@@ -2,7 +2,7 @@
 Get any discord user or bot by id !
 
 # Live Instance
-**[https://user.x-bot.fr/](https://user.x-bot.fr/)**
+**[whois.mrrobot.app](https://whois.mrrobot.app/)**
 # Live Instance Preview
 ![img](https://i.gyazo.com/450afcd320c7ca2ba29c1eb9219322c0.png)
 ![img](https://gyazo.com/8e4ac8c3826995277e6d127f1f6a77a4.gif)
