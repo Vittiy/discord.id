@@ -1,5 +1,6 @@
 
 module.exports = {
-    TOKEN: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.XXXXXXXXX.XXXXXXXXXXXXXXXXXX",
+    TOKEN: "BOT_TOKEN",
+    title: "Discord.Id",
     PORT: 8000
 };

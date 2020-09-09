@@ -13,4 +13,4 @@ Get any discord user or bot by id !
 
 # SETUP
 
-rename `config.example.js` to `config.js` and complet them.
+rename `config.example.js` to `config.example.js` and complet them.
