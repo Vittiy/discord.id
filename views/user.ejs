@@ -1,5 +1,5 @@
 <%- include("./partials/header.ejs") %>
-    <meta name="description" content="• <%= user.username %>#<%= user.discriminator %>" />
+    <meta name="description" content=" 🔧 ID <%= user.id %> \n✌ Pseudo <%= user.username %> \n#️⃣ Discriminateur #<%= user.discriminator %> \n🤖 Est-il/elle un robot ? <%= user.bot ? "Oui " : "Non" %><%= user.verified ? " et verifié. ✔" : "" %> \n⏱ Nombre de jour <%= checkDays(user.createdAt) %> jours" />
     <meta name="image" content="<%= user.displayAvatarURL({ dynamic: true, format: "png", size: 1024 }) %>" />
     <meta name="theme-color" content="#7289da">
 <%- include("./partials/loader.ejs") %>
