@@ -1,4 +1,7 @@
 <%- include("./partials/header.ejs") %>
+    <meta name="description" content="• <%= user.username %>#<%= user.discriminator %>" />
+    <meta name="image" content="<%= user.displayAvatarURL({ dynamic: true, format: "png", size: 1024 }) %>" />
+    <meta name="theme-color" content="#7289da">
 <%- include("./partials/loader.ejs") %>
 <%
     function generateBadge(verified = false) {
