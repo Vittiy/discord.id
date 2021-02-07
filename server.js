@@ -36,34 +36,46 @@ app.post("/", async (req, res) => {
 });
 
 // main route (get)
-app.get("/:userID", async (req, res) => {
-    const userid = req.params.userID;
-    if (!userid) return res.redirect("/404", {
-        title: config.title
-    });
+app.get("/:userID/:json?", async (req, res) => {
+    if (req.params.json = 'json') {
+        var user = client.users.cache.get(req.params.id)
+        if (!user) {
+            user = await client.users.fetch(req.params.id).catch(e => {
+                res.send('{"error":"undefined"}')
+            })
+        } else res.send(user);
+    } else {
+        const userid = req.params.userID;
+        if (!userid) return res.redirect("/404", {
+            title: config.title
+        });
 
-    // fetch user
-    const user = userid === client.user.id ? client.user : await client.users.fetch(getID(userid)).catch(e => {});
-    if (!user) return res.render("index", {
-        error: "Invalid user id!",
-        title: config.title
-    });
-    if (!user.flags) await user.fetchFlags();
-    // get data
-    const Flags = user.flags.toArray();
-    if (user.bot && Flags.includes("VERIFIED_BOT")) user.verified = true;
-    const flags = Flags.filter(b => !!Badges[b]).map(m => Badges[m]);
-    if (user.avatar && user.avatar.startsWith("a_")) flags.push(Badges["DISCORD_NITRO"]);
-    if (user.bot) {
-        flags.push(Badges["BOT"]);
+        // fetch user
+        const user = userid === client.user.id ? client.user : await client.users.fetch(getID(userid)).catch(e => {
+        });
+        if (!user) return res.render("index", {
+            error: "Invalid user id!",
+            title: config.title
+        });
+        if (!user.flags) await user.fetchFlags();
+        // get data
+        const Flags = user.flags.toArray();
+        if (user.bot && Flags.includes("VERIFIED_BOT")) user.verified = true;
+        const flags = Flags.filter(b => !!Badges[b]).map(m => Badges[m]);
+        if (user.avatar && user.avatar.startsWith("a_")) flags.push(Badges["DISCORD_NITRO"]);
+        if (user.bot) {
+            flags.push(Badges["BOT"]);
+        }
+
+        return res.render("user", {
+            user,
+            flags,
+            title: config.title
+        });
     }
 
-    return res.render("user", {
-        user,
-        flags,
-        title: config.title
-    });
 });
+
 
 
 // handle invalid routes/methods
