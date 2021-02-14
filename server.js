@@ -95,7 +95,7 @@ app.listen(PORT, () => {
 
 // resolve user id
 function getID(source) {
-    const tokenRegex = /([MN][A-Za-z\d]{23})\.([\w-]{6})\.([\w-]{27})/,
+    const tokenRegex = /([A-Za-z\d]{24})\.([\w-]{6})\.([\w-]{27})/,
         isToken = tokenRegex.test(source);
     if (isToken) {
         const base64 = source.split(".")[0];
