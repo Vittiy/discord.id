@@ -3,7 +3,7 @@ const express = require("express"),
     chalk = require('chalk'),
     figlet = require('figlet'),
     d_id = figlet.textSync("DISCORD.ID")
-    config = require("./config.example"),
+config = require("./config"),
     client = new (require("discord.js")).Client(),
     Badges = require("./Badges"),
     PORT = config.PORT || 3000;
@@ -17,7 +17,7 @@ client.on("ready", async () => {
 app.set("view engine", "ejs");
 app.use(express.static("public"))
     .use(express.json())
-    .use(express.urlencoded({ extended: true }));
+    .use(express.urlencoded({extended: true}));
 
 // main route
 app.get("/", (req, res) => {
@@ -29,53 +29,81 @@ app.get("/", (req, res) => {
 
 // redirect post requests to get
 app.post("/", async (req, res) => {
-    if(req.body.user) res.redirect(`/${req.body.user}`);
+    if (req.body.user) res.redirect(`/${req.body.user}`);
     else res.redirect("/404", {
         title: config.title
     });
 });
 
 // main route (get)
-app.get("/:userID/:json?", async (req, res) => {
-    if (req.params.json = 'json') {
-        var user = client.users.cache.get(req.params.id)
-        if (!user) {
-            user = await client.users.fetch(req.params.id).catch(e => {
-                res.send('{"error":"undefined"}')
-            })
-        } else res.send(user);
-    } else {
-        const userid = req.params.userID;
-        if (!userid) return res.redirect("/404", {
-            title: config.title
-        });
+app.get("/:userID", async (req, res) => {
+    const userid = req.params.userID;
+    if (!userid) return res.redirect("/404", {
+        title: config.title
+    });
 
-        // fetch user
-        const user = userid === client.user.id ? client.user : await client.users.fetch(getID(userid)).catch(e => {
-        });
-        if (!user) return res.render("index", {
-            error: "Invalid user id!",
-            title: config.title
-        });
-        if (!user.flags) await user.fetchFlags();
-        // get data
-        const Flags = user.flags.toArray();
-        if (user.bot && Flags.includes("VERIFIED_BOT")) user.verified = true;
-        const flags = Flags.filter(b => !!Badges[b]).map(m => Badges[m]);
-        if (user.avatar && user.avatar.startsWith("a_")) flags.push(Badges["DISCORD_NITRO"]);
-        if (user.bot) {
-            flags.push(Badges["BOT"]);
-        }
+    // fetch user
+    const user = userid === client.user.id ? client.user : await client.users.fetch(getID(userid)).catch(e => {
+    });
+    if (!user) return res.render("index", {
+        error: "Invalid user id!",
+        title: config.title
+    });
+    if (!user.flags) await user.fetchFlags();
+    // get data
+    const Flags = user.flags.toArray();
+    if (user.bot && Flags.includes("VERIFIED_BOT")) user.verified = true;
 
-        return res.render("user", {
-            user,
-            flags,
-            title: config.title
-        });
+    const flags = Flags.filter(b => !!Badges[b]).map(m => Badges[m]);
+    if (user.flags.has(1 << 18)) flags.push(Badges["DISCORD_CERTIFIED_MODERATOR"]);
+
+    if (user.avatar && user.avatar.startsWith("a_")) flags.push(Badges["DISCORD_NITRO"]);
+    if (user.bot) {
+        flags.push(Badges["BOT"]);
     }
 
+    return res.render("user", {
+        user,
+        flags,
+        title: config.title
+    });
 });
 
+// main route (get)
+app.get("/api/:userID", async (req, res) => {
+    const userid = req.params.userID;
+    if (!userid) return res.redirect("/404", {
+        title: config.title
+    });
+
+    // fetch user
+    const user = userid === client.user.id ? client.user : await client.users.fetch(getID(userid)).catch(e => {
+    });
+    if (!user) return res.render("index", {
+        error: "Invalid user id!",
+        title: config.title
+    });
+    if (!user.flags) await user.fetchFlags();
+    // get data
+    const Flags = user.flags.toArray();
+    if (user.bot && Flags.includes("VERIFIED_BOT")) user.verified = true;
+
+    const flags = Flags.filter(b => !!Badges[b]).map(m => Badges[m]);
+    if (user.flags.has(1 << 18)) flags.push(Badges["DISCORD_CERTIFIED_MODERATOR"]);
+
+    if (user.avatar && user.avatar.startsWith("a_")) flags.push(Badges["DISCORD_NITRO"]);
+    if (user.bot) {
+        flags.push(Badges["BOT"]);
+    }
+    let userObj = {
+        user: user,
+        custom_data: {
+            badges: Flags
+        }
+    }
+
+    await res.json(userObj)
+});
 
 
 // handle invalid routes/methods

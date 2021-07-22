@@ -1,50 +1,52 @@
-<%- include("./partials/header.ejs") %>
-    <meta name="description" content=" 🔧 ID <%= user.id %> \n✌ Pseudo <%= user.username %> \n#️⃣ Discriminateur #<%= user.discriminator %> \n🤖 Est-il/elle un robot ? <%= user.bot ? "Oui " : "Non" %><%= user.verified ? " et verifié. ✔" : "" %> \n⏱ Nombre de jour <%= checkDays(user.createdAt) %> jours" />
-    <meta name="image" content="<%= user.displayAvatarURL({ dynamic: true, format: "png", size: 1024 }) %>" />
-    <meta name="theme-color" content="#7289da">
-<%- include("./partials/loader.ejs") %>
-<%
-    function generateBadge(verified = false) {
-        if (flags.length < 1) return;
-        if (!verified && flags.find(i => i.name === "Bot")) return `<img draggable="false" class="rounded ml-2 botbadge" src="${flags.find(i => i.name === "Bot").url}">`;
-        if (verified && flags.find(i => i.name === "Verified Bot")) return `<img draggable="false" class="rounded ml-2 botbadge-v" src="${flags.find(i => i.name === "Verified Bot").url}" data-toggle="tooltip" data-placement="top" title="Verified Bot">`;
-        return `<img draggable="false" class="rounded ml-2 botbadge" src="${flags.find(i => i.name === "Bot").url}">`;;
-    }
-%>
-<div class="container">
-    <div class="jumbotron bg-transparent bg-alpha-dark text-white mt-5">
-        <div class="row" style="width: 100%;">
-            <div class="col-sm-2 avatar">
-                <img src="<%= user.displayAvatarURL({ dynamic: true, format: "png", size: 1024 }) %>" draggable="false" class="rounded float-left avatar" alt="avatar">
-            </div>
-            <div class="col-sm">
-                <h1 class="username"><%= user.username.substr(0,32) %><small class="text-muted discriminator">#<%= user.discriminator %></small>
-                    <%- user.bot ? (user.bot && user.verified) ? generateBadge(true) : generateBadge() : "" %><button class="btn btn-discord-green rounded float-right" onclick="location.href='/'">Return Home</button></h1>
-                <% 
-                flags.forEach(badge => { 
-                    if (badge.name === "Bot" || badge.name === "Verified Bot") return;
-                    else {
-                %>
-                <img class="img-fluid badges" draggable="false" src="<%= badge.url %>" data-toggle="tooltip" data-placement="top" title="<%= badge.name %>">
-                <% 
-                    }
-                }) 
-                %>
-                <hr class="bg-transparent my-4">
-                <h5><b>ID:</b> <%= user.id %></h5>
-                <h5><b>Username:</b> <%= user.username %></h5>
-                <h5><b>Discriminator:</b> <%= user.discriminator %></h5>
-                <h5><b>Bot?:</b> <%= user.bot ? "Yes" : "No" %><%= user.verified ? "✅" : "" %></h5>
-                <h5><b>Created at:</b> <%= user.createdAt.toLocaleString() %></h5>
-            </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="vue-managed"><%= user.username %></title>
+    <!-- Import Font Awesome Icon Kit -->
+    <script src="https://kit.fontawesome.com/6e5392ed44.js" crossorigin="anonymous"></script>
+    <!-- Import Vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <!-- Import Bulma CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.css">
+    <!-- Import Custom CSS -->
+    <link rel="stylesheet" href="/css/user.css">
+
+</head>
+<body>
+<div class="box profile">
+    <div class="top-part">
+        <img class="profile-picture" src="<%= user.displayAvatarURL({ dynamic: true, format: "png", size: 1024 }) %>" alt="Profile Picture" />
+        <p class="name"><%= user.username %></p>
+        <ul class="badges">
+            <%
+            flags.forEach(badge => {
+                if (badge.name === "Bot" || badge.name === "Verified Bot") return;
+                else {
+                    %>
+                <li><img src="<%= badge.url %>" alt="<%= badge.name %>"/></li>
+            <%
+                }
+            })
+            %>
+        </ul>
+    </div>
+    <div class="middle-part">
+        <div class="bio">
+            <h5 class="user-details"><b>ID:</b> <%= user.id %></h5>
+            <h5 class="user-details"><b>Username:</b> <%= user.username %></h5>
+            <h5 class="user-details"><b>User - Tag:</b> <%= user.tag %></h5>
+            <h5 class="user-details"><b>Discriminator:</b> <%= user.discriminator %></h5>
+            <h5 class="user-details"><b>Bot?:</b> <%= user.bot %></h5>
+            <h5 class="user-details"><b>Created at:</b> <%= user.createdAt.toLocaleString() %></h5>
+        </div>
+
+        <div class="home_link">
+            <a href="/" class="home_button">← Return to the home page.</a>
         </div>
     </div>
 </div>
-<script>
-    $(".badges").tooltip();
-    $(".botbadge").tooltip();
-    $(".botbadge-v").tooltip();
-</script>
 </body>
-
 </html>
