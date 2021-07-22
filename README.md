@@ -1,10 +1,10 @@
 # discord.id
 Get any discord user or bot by id !
 
-# Working On 
-- Snowflakes creation date if isn't an user id
+# Change Log
 - /api/userid
 - Add certified moderator badge
+- Update profile card
 
 # Live Instance
 **[whois.mrrobot.app](https://whois.mrrobot.app/)**
