@@ -2,24 +2,30 @@
 <%- include("./partials/loader.ejs") %>
 
 <div class="container">
-    <div class="jumbotron bg-dark text-white mt-5">
+    <div class="card bg-dark text-white mt-5 shadow-sm">
         <% if (error) { %>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong><%= error %></strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <% } %>
-        <form method="POST">
-            <div class="form-group">
-                <label for="userid"><h3>User ID <i class="required" data-placement="right" title="Required">*</i></h3></label>
-                <input type="text" class="form-control" id="userid" name="user" aria-describedby="help" autocomplete="off" required>
-                <small id="help" class="form-text text-muted">Enter discord user id here.</small>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <%= error %>
             </div>
-            <button type="submit" class="btn btn-blurple rounded" style="width: 100% !important;">Submit</button>
-            <small id="info" class="form-text text-muted">Not affiliated with Discord, Inc. <a href="https://github.com/ssoraa/discord.id">GITHUB</a>, <a href="https://discord.gg/VYRa3g8">DISCORD</a></small>
-        </form>
+        <% } %>
+        <div class="card-body">
+            <form method="POST">
+                <div class="form-group">
+                    <div class="card-title">
+                        <label for="userid" class="usr_title">User ID <i class="required" data-placement="right" title="Requis">*</i></label>
+                    </div>
+                    <input type="text" class="form-control" id="userid" name="user" aria-describedby="help" autocomplete="off"  placeholder="Enter user / bot id or token." autofocus required>
+                </div>
+                <div class="card-body">
+                    <button type="submit" class="btn btn-blurple rounded" style="width: 100% !important;">Submit</button>
+                </div>
+            </form>
+        </div>
+        <div class="card-body notice_footer">
+            <p id="info" class="card-text text-muted">Not affiliated with Discord, Inc.
+                — <a href="https://github.com/ssoraa/discord.id" class="card-text text-muted" target="_blank">Github</a>
+                — <a href="https://github.com/thomasbnt" class="card-text text-muted" target="_blank">thomasbnt</a>
+        </div>
     </div>
 </div>
 <script>
